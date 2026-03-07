@@ -8,7 +8,7 @@ const C = {
   inkSoft: "#57534E",
   inkMuted: "#A8A29E",
   accent: "#B45309",    // warm amber — studio identity
-  avGreen: "#2DB55D",   // antiviral
+  avGreen: "#5E8C61",   // antiviral — muted green per brief
   ivWarm: "#C2410C",    // inner voice — burnt orange/red
   border: "#E7E5E4",
   cardBg: "#FFFFFF",
@@ -322,7 +322,7 @@ export default function StudioIkigai() {
           <ProductCard
             name="Antiviral"
             tagline="Your feed, finally yours."
-            description="A content app that replaces algorithmic feeds with AI that runs on your phone, answers to nobody but you, and never calls home. Import your YouTube subscriptions, podcasts, and blogs. Talk to your feed. It listens."
+            description="An on-device AI that curates your feed from your own subscriptions — YouTube, podcasts, blogs — answering to nobody but you. No servers, no tracking, no algorithmic agenda. Talk to your feed. It listens."
             accent={C.avGreen}
             badge="Free"
             features={[
@@ -339,11 +339,11 @@ export default function StudioIkigai() {
           <ProductCard
             name="Inner Voice"
             tagline="Hear yourself clearly."
-            description="A vocal wellness app that transforms your voice recordings into visual sigils and gives you AI feedback on authentic self-expression. Not how you perform. How you sound when you're being real."
+            description="A vocal wellness app that transforms your voice recordings into Visual Voice Prints and gives you AI feedback on authentic self-expression. Not how you perform. How you sound when you're being real."
             accent={C.ivWarm}
             badge="Beta"
             features={[
-              "Voice recordings transformed into visual sigils",
+              "Voice recordings transformed into Voice Prints",
               "AI feedback on expression, not performance",
               "Voice Expression Index — authenticity over technique",
               "Companion apps for singing and music creation",
@@ -390,7 +390,7 @@ export default function StudioIkigai() {
               margin: "0 0 32px",
               fontWeight: 400,
             }}>
-              Every platform built a model of who you are and hid it from you. They used it to sell your attention, shape your behavior, and measure your voice against metrics that serve their interests, not yours.
+              Every platform built a model of your interests and hid it from you. They used it to sell your attention, shape your behavior, and measure your voice against metrics that serve their interests, not yours. We hand it back.
             </blockquote>
           </Reveal>
 
@@ -401,7 +401,7 @@ export default function StudioIkigai() {
               color: C.inkSoft,
               fontWeight: 300,
             }}>
-              Studio Ikigai builds software that reverses this. On-device intelligence. Transparent models. Your data stays on your phone. We make tools for people who want to understand themselves — what they pay attention to, how they express themselves — without handing that understanding to someone else.
+              This is the workshop where the tools are made. On-device intelligence. Transparent models. Your data stays on your phone. We build for people who want to understand themselves — what they pay attention to, how they express themselves — without handing that understanding to someone else.
             </p>
           </Reveal>
         </div>
@@ -444,6 +444,14 @@ export default function StudioIkigai() {
             {
               title: "Expression over performance",
               body: "We don't optimize for engagement metrics or vocal perfection. We build tools that help you be more authentically yourself.",
+            },
+            {
+              title: "Honesty over polish",
+              body: "We ship what's real. No inflated metrics, no dark patterns, no language designed to obscure what the software actually does.",
+            },
+            {
+              title: "Restraint as craft",
+              body: "The features we leave out matter as much as the ones we build. Every addition is weighed against the cost of complexity.",
             },
           ].map((p, i) => (
             <Reveal key={i} delay={i * 0.1}>
