@@ -1,14 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { Analytics } from "@vercel/analytics/react"
-import Gate from "./Gate.jsx"
 import App from "./App.jsx"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Gate>
-      <App />
-    </Gate>
+    <App />
     <Analytics />
   </React.StrictMode>,
 )
