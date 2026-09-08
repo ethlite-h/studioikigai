@@ -1,0 +1,15 @@
+# Studio Ikigai
+
+> Independent software studio in San Diego, founded April 2025 by Helen Ma (17 years at Apple: original iPhone/iPad teams, visionOS, Journal). Builds on-device AI apps for markets big tech can't profitably serve ("Micro Tech").
+
+## Products
+- Antiviral (https://getantiviral.app): on-device conversational feed curation from your own subscriptions, iOS & macOS, in TestFlight.
+- Inner Voice (https://findyourinnervoice.app): vocal wellness app; Visual Voice Prints; CREPE, HuBERT and Whisper run on-device via Core ML; iOS, in TestFlight.
+- Inner Voice Sing!: describe a song, an AI provider writes the instrumental, you sing it and are scored on-device.
+
+## Thesis
+- Essay: Software Engineering's Podcast Moment — https://ethlite.substack.com/p/software-engineerings-podcast-moment
+- Newsletter/podcast: Immortal Pyramids — https://ethlite.substack.com
+
+## Contact
+- info@studioikigai.ai

@@ -5,7 +5,7 @@
   --paper-3: #E1DACB;
   --ink: #1A1714;
   --ink-2: #4A443D;
-  --ink-3: #7B7369;
+  --ink-3: #635C54;
   --line: rgba(26, 23, 20, 0.12);
   --line-2: rgba(26, 23, 20, 0.22);
   --seal: #C8371C;
@@ -292,11 +292,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ───────────────────────────── founder ───────────────────────────── */
 .founder { background: var(--ink); color: var(--paper); }
 .founder .lede, .founder .body { color: rgba(243, 239, 230, 0.78); }
-.founder .mono { color: rgba(243, 239, 230, 0.55); }
+.founder .mono { color: rgba(243, 239, 230, 0.7); }
 .founder figure { display: grid; gap: 18px; justify-items: center; }
 .founder .portrait { position: relative; aspect-ratio: 1; width: min(420px, 80vw); border-radius: 50%; overflow: hidden; border: 1px solid rgba(243, 239, 230, 0.15); }
 .founder .portrait canvas { width: 100%; height: 100%; }
-.founder .cap { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(243, 239, 230, 0.6); text-align: center; }
+.founder .cap { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(243, 239, 230, 0.72); text-align: center; }
 .founder blockquote { font-family: var(--serif); font-size: clamp(24px, 3.4vw, 40px); line-height: 1.2; letter-spacing: -0.015em; font-variation-settings: "opsz" 96, "SOFT" 40, "WONK" 1; }
 .founder blockquote em { color: #E8A48F; font-style: italic; }
 .founder .sig { font-family: var(--serif); font-style: italic; font-size: 26px; font-variation-settings: "opsz" 40, "SOFT" 80; color: var(--paper); }
@@ -374,7 +374,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .founder figure { gap: 22px; }
 .founder .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(243, 239, 230, 0.12); border: 1px solid rgba(243, 239, 230, 0.12); border-radius: 16px; overflow: hidden; margin: 32px auto 0; max-width: 420px; }
 .founder .facts > div { background: var(--ink); padding: 16px 18px; display: grid; gap: 4px; }
-.founder .facts dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243, 239, 230, 0.55); }
+.founder .facts dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243, 239, 230, 0.7); }
 .founder .facts dd { margin: 0; font-family: var(--serif); font-size: 34px; line-height: 1; letter-spacing: -0.02em; font-variation-settings: "opsz" 96, "SOFT" 30; }
 .founder .btn.ghost { border-color: rgba(243, 239, 230, 0.25); }
 

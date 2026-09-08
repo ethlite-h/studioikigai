@@ -30,13 +30,14 @@ export function Listen({ src = "/media/she-rises-clip.m4a", label = "Hear She Ri
   const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
   return (
-    <button type="button" className={`listen ${state}`} onClick={toggle} aria-pressed={state === "playing"} aria-label={state === "playing" ? "Pause the clip" : label}>
+    <button type="button" className={`listen ${state}`} onClick={toggle} aria-pressed={state === "playing"}>
       <audio ref={audio} src={src} preload="none" />
       <span className="ring" style={{ "--p": `${pct}%` }} aria-hidden="true">
         <i className="glyph" />
       </span>
       <span className="txt">
         <b>{state === "playing" ? "Playing" : state === "paused" ? "Paused" : state === "loading" ? "Loading" : label}</b>
+        <span className="sr-only">{state === "playing" ? ", press to pause" : ", press to play a 32-second clip"}</span>
         <small>{state === "idle" ? `Her voice · ${mmss(dur)} clip` : `${mmss(t)} / ${mmss(dur)}`}</small>
       </span>
     </button>

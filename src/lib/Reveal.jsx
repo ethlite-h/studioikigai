@@ -26,7 +26,8 @@ export function Reveal({ as: Tag = "div", className = "", delay = 0, children, t
 export function Words({ text, className = "", delay = 0, stagger = 0.035, as: Tag = "span", mount = false }) {
   const words = text.split(" ");
   return (
-    <Tag className={`words ${className} ${mount ? "mount" : ""}`} aria-label={text}>
+    <Tag className={`words ${className} ${mount ? "mount" : ""}`}>
+      <span className="sr-only">{text}</span>
       {words.map((w, i) => (
         <span key={i}>
           <span className="w" aria-hidden="true"><span style={{ "--d": `${delay + i * stagger}s` }}>{w}</span></span>
