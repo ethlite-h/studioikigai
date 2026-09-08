@@ -1,9 +1,13 @@
 // Generates public/media assets with the bundled ffmpeg-static binary.
-//   node scripts/make-video.mjs                 → synthesised melody (no song on disk)
+//   BUNDLE="/path/to/She Rises!" node scripts/make-video.mjs
+//       → preferred: the Inner Voice BrightStar bundle (stems + brightstar.json).
+//         Mixes "0 Lead Vocals.m4a" + "1 Instrumental.m4a" into she-rises.m4a,
+//         renders the spectrogram/waveform from the vocal stem alone, and
+//         exports phrase/word/note timing to src/data/she-rises.json.
 //   SONG="/path/She Rises!.mp3" node scripts/make-video.mjs
-//                                                 → real song: 32 s listening clip,
-//                                                   spectrogram + waveform videos, posters
-// CLIP_START (seconds) picks where the clip begins; default 94 (the loudest 30 s).
+//       → a plain mix: 32 s clip + videos from the full mix (CLIP_START picks the offset).
+//   node scripts/make-video.mjs
+//       → no audio on disk: synthesised melody for the videos only.
 import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
@@ -15,12 +19,19 @@ if (!existsSync(out)) mkdirSync(out, { recursive: true });
 const run = (args) => execFileSync(ffmpeg, ["-y", "-hide_banner", "-loglevel", "error", ...args], { stdio: "inherit" });
 
 const SONG = process.env.SONG;
+const BUNDLE = process.env.BUNDLE;
 const CLIP_START = Number(process.env.CLIP_START ?? 94);
 const CLIP_LEN = 32;
 const VID_LEN = 12;
 
 let src, srcOffset;
-if (SONG && existsSync(SONG)) {
+if (BUNDLE && existsSync(BUNDLE + "/brightstar.json")) {
+  const voc = BUNDLE + "/0 Lead Vocals.m4a", inst = BUNDLE + "/1 Instrumental.m4a";
+  run(["-i", voc, "-i", inst, "-filter_complex", "[0:a][1:a]amix=inputs=2:normalize=0,loudnorm=I=-15:TP=-1.2[a]", "-map", "[a]", "-c:a", "aac", "-b:a", "112k", "-movflags", "+faststart", out + "she-rises.m4a"]);
+  exportTiming(BUNDLE + "/brightstar.json");
+  src = voc; srcOffset = Number(process.env.CLIP_START ?? 24); // first chorus
+  console.log("mixed the bundle stems; videos from the vocal stem at", srcOffset, "s");
+} else if (SONG && existsSync(SONG)) {
   // 1) the listening clip: AAC, fades in and out
   run(["-ss", String(CLIP_START), "-t", String(CLIP_LEN), "-i", SONG,
     "-af", `afade=t=in:d=1.2,afade=t=out:st=${CLIP_LEN - 2}:d=2,loudnorm=I=-16:TP=-1.5`,
@@ -39,18 +50,37 @@ const inputShort = ["-ss", String(srcOffset), "-t", "8", "-i", src];
 
 // 2) scrolling spectrogram: a literal voice print
 run([...input, "-filter_complex",
-  `[0:a]${SONG ? "highpass=f=240," : ""}showspectrum=s=1280x720:slide=scroll:mode=combined:color=intensity:scale=sqrt:gain=${SONG ? 0.8 : 1.4}:fscale=log:win_func=blackman:overlap=0.9:legend=0,format=gray,eq=contrast=${SONG ? 1.35 : 1.6}:brightness=${SONG ? -0.08 : -0.12},${tint},gblur=sigma=0.6,format=yuv420p[v]`,
-  "-map", "[v]", "-an", "-r", "30", "-c:v", "libx264", "-preset", "slow", "-crf", "24", "-movflags", "+faststart", out + "voiceprint.mp4"]);
+  `[0:a]${SONG && !BUNDLE ? "highpass=f=240," : ""}showspectrum=s=1280x720:slide=scroll:mode=combined:color=intensity:scale=sqrt:gain=${BUNDLE ? 1.1 : SONG ? 0.8 : 1.4}:fscale=log:win_func=blackman:overlap=0.9:legend=0,format=gray,eq=contrast=${BUNDLE ? 1.45 : SONG ? 1.35 : 1.6}:brightness=${BUNDLE ? -0.1 : SONG ? -0.08 : -0.12},${tint},gblur=sigma=0.6,format=yuv420p[v]`,
+  "-map", "[v]", "-an", "-r", "30", "-t", String(VID_LEN), "-c:v", "libx264", "-preset", "medium", "-crf", "25", "-movflags", "+faststart", out + "voiceprint.mp4"]);
 
 // 3) ink oscilloscope line
 run([...inputShort, "-filter_complex",
-  `color=c=0xF3EFE6:s=960x270:r=25[bg];[0:a]aformat=channel_layouts=mono,lowpass=f=900,showwaves=s=960x270:mode=p2p:colors=0x1A1714:scale=lin:draw=full:n=2[w];[bg][w]overlay=format=auto:shortest=1,gblur=sigma=1.1,format=yuv420p[v]`,
+  `color=c=0xF3EFE6:s=960x270:r=25[bg];[0:a]aformat=channel_layouts=mono,lowpass=f=1200,showwaves=s=960x270:mode=p2p:colors=0x1A1714:scale=lin:draw=full:n=2[w];[bg][w]overlay=format=auto:shortest=1,gblur=sigma=1.1,format=yuv420p[v]`,
   "-map", "[v]", "-an", "-t", "8", "-c:v", "libx264", "-preset", "veryfast", "-crf", "33", "-movflags", "+faststart", out + "waveform.mp4"]);
 
 // posters
 run(["-ss", "6", "-i", out + "voiceprint.mp4", "-frames:v", "1", "-q:v", "4", out + "voiceprint.jpg"]);
 run(["-ss", "6", "-i", out + "waveform.mp4", "-frames:v", "1", "-q:v", "4", out + "waveform.jpg"]);
 console.log("done");
+
+/* BrightStar bundle → compact timeline for the Sing! mockup (src/data/she-rises.json). */
+function exportTiming(path) {
+  const d = JSON.parse(require("node:fs").readFileSync(path, "utf8"));
+  const phrases = d.parts[0].phrases;
+  // section labels by phrase index, from the founder's lyric sheet
+  const sec = { 0: "Intro", 6: "Pre-chorus", 9: "Chorus", 14: "Bridge", 16: "Chorus", 21: "Breakdown", 27: "Chorus", 32: "Outro" };
+  let cur = null;
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const outJ = { title: d.meta.title, artist: (d.meta.artists || [])[0] || "", duration: 169.88, src: "/media/she-rises.m4a", phrases: [] };
+  phrases.forEach((p, i) => {
+    if (sec[i]) cur = sec[i];
+    const w = p.words.map((x) => { const n = x.syllables.map((s) => s.target_note); return { t: x.text, s: r2(x.start_ms / 1000), e: r2(x.end_ms / 1000), n: Math.round(n.reduce((a, b) => a + b, 0) / n.length) }; });
+    outJ.phrases.push({ sec: cur, s: r2(p.start_ms / 1000), e: r2(p.end_ms / 1000), w });
+  });
+  const dest = new URL("../src/data/she-rises.json", import.meta.url).pathname;
+  writeFileSync(dest, JSON.stringify(outJ));
+  console.log("timing →", dest, outJ.phrases.length, "phrases");
+}
 
 /* Fallback: a rising motif with vocal-ish harmonics, written to a temp WAV. */
 function synth() {

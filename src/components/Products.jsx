@@ -29,7 +29,7 @@ const PRODUCTS = [
   {
     id: "sing", n: "03", name: "Inner Voice Sing!", badge: "The case study", acc: "var(--indigo)",
     title: "Your song. Your lyrics. Your voice.",
-    lede: "Describe a song. Sing! has an AI provider write the instrumental, transposes it into your range, and scores your pitch, timing and diction live as you sing, with every scoring model running on the phone. The only thing the AI made is the backing track.",
+    lede: "Describe a song. Sing! has an AI provider write the instrumental, transposes it into your range, and scores your pitch, timing and diction live as you sing, with every scoring model running on the phone. Press play: the mockup follows the real take of She Rises!, word by word, from the studio's own timing data.",
     feats: ["Started as a port of open-source UltraStar. Nothing of it remains.", "Scoring is on-device: CREPE, HuBERT and Whisper through Core ML, no round trip to a server", "Instrumentals from swappable providers (ElevenLabs, Suno), never your voice", "The first song shipped was written for an eight-year-old"],
     cta: ["Read how it was built", "#theseus"],
     Phone: SingPhone,
@@ -71,7 +71,7 @@ function Product({ p, i }) {
             </video>
           )}
           <p.Phone />
-          <p className="thin-note stage-cap">Interactive mockup · sample data</p>
+          <p className="thin-note stage-cap">{p.listen ? "Interactive mockup · real timing, sample scores" : "Interactive mockup · sample data"}</p>
         </Reveal>
       </div>
     </article>

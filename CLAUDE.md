@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — start Vite dev server (add `-- --host` to open it on the LAN for phone testing)
 - `npm run build` — production build to `dist/`
 - `npm run preview` — serve the production build locally
-- `SONG="/path/She Rises!.mp3" node scripts/make-video.mjs` — regenerate `public/media/` (32 s AAC clip, spectrogram + waveform videos, posters) from the real song with the `ffmpeg-static` binary; without `SONG` it synthesises a melody. `CLIP_START` picks the clip offset (default 94 s, the loudest 30 s). The song itself is not in the repo.
+- `BUNDLE="$HOME/Library/Mobile Documents/iCloud~ai~studioikigai~innervoice/Documents/Bundles 2/She Rises!" node scripts/make-video.mjs` — regenerate `public/media/` from the Inner Voice BrightStar bundle: mixes the vocal and instrumental stems into `she-rises.m4a` (the track the Listen button plays), renders the spectrogram and waveform videos from the vocal stem, and exports phrase/word/target-note timing to `src/data/she-rises.json` (what the Sing! mockup syncs to). `SONG=` renders from a plain mix instead; no env renders from a synthesised melody. Stems and song are not in the repo.
 
 No tests, linter, or type-checker are configured.
 
@@ -25,7 +25,7 @@ Single-page React 18 marketing site for Studio Ikigai, built with Vite and deplo
 - `src/components/Math.jsx` — the interactive users × price × team calculator.
 - `src/components/Products.jsx` — product data (copy, features, CTAs) and the alternating chapter layout. Phone mockups live in `src/phones/` (Antiviral: DOM + timers; Inner Voice and Sing!: 2D canvas via `useCanvasLoop`, paused when off-screen).
 - `src/components/Founder.jsx` — dark section; toggles `.nav.dark` while it sits under the fixed nav. Real photo (`public/media/helen.webp|jpg`) with a canvas voice-print halo behind it, bio written from the founder's resume (employers named by her choice), and a facts grid.
-- `src/components/Listen.jsx` — play/pause button for the 32 s clip of "She Rises!" (`public/media/she-rises-clip.m4a`, loaded only on press). Used in the Sing! chapter.
+- `src/lib/player.js` — one shared `<audio>` for "She Rises!" (`public/media/she-rises.m4a`, 2:50, loaded only on press) with a subscribe API. `src/components/Listen.jsx` is the play/pause button; `src/phones/SingPhone.jsx` reads `player.now()` every frame to highlight the current phrase and sung words and to draw target-note bars from `src/data/she-rises.json`. When nothing is playing it silently loops the first chorus (24–37.6 s) so the mock still moves.
 - `src/components/Log.jsx` — studio log; `ENTRIES` array, newest first. Only add things that actually happened.
 - `src/components/Newsletter.jsx` — email field that hands off to Substack's subscribe page (GET, new tab). No backend, no list of ours.
 - `src/components/Seal.jsx` — the vermilion 生き甲斐 hanko used as the logo.
