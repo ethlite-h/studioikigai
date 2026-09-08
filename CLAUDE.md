@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — start Vite dev server (add `-- --host` to open it on the LAN for phone testing)
 - `npm run build` — production build to `dist/`
 - `npm run preview` — serve the production build locally
-- `BUNDLE="$HOME/Library/Mobile Documents/iCloud~ai~studioikigai~innervoice/Documents/Bundles 2/She Rises!" node scripts/make-video.mjs` — regenerate `public/media/` from the Inner Voice BrightStar bundle: mixes the vocal and instrumental stems into `she-rises.m4a` (the track the Listen button plays), renders the spectrogram and waveform videos from the vocal stem, and exports phrase/word/target-note timing to `src/data/she-rises.json` (what the Sing! mockup syncs to). `SONG=` renders from a plain mix instead; no env renders from a synthesised melody. Stems and song are not in the repo.
+- `STEMS="$HOME/Downloads/She Rises! Stems" node scripts/make-video.mjs` — regenerate `public/media/` from the song's stems: mixes "0 Lead Vocals" + "1 Instrumental" into `she-rises.m4a` (the track the Listen button plays) and renders the spectrogram and waveform videos from the vocal stem alone. `SONG=` renders from a plain mix instead; no env renders from a synthesised melody.
+- `scripts/align-lyrics.py` — forced alignment of `scripts/she-rises-lyrics.txt` to the vocal stem with stable-ts (usage in the file header); writes `src/data/she-rises.json` (phrase/word timing plus an estimated MIDI note per word). The lyric sheet omits "She wasn't weak. / She was whole." because that take does not sing them. The BrightStar bundle in the Inner Voice iCloud folder is an older arrangement (2:50) — do not use it. Stems are not in the repo.
 
 No tests, linter, or type-checker are configured.
 
