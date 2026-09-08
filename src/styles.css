@@ -351,3 +351,42 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .seal-mark { display: inline-block; transform: rotate(-2deg); }
 .marquee-h { overflow: hidden; }
 .thin-note { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); line-height: 1.7; }
+
+/* ───────────────────────────── listen button ───────────────────────────── */
+.listen { display: inline-flex; align-items: center; gap: 14px; min-height: 56px; padding: 6px 18px 6px 6px; border-radius: 100px; border: 1px solid var(--line-2); background: #fff; text-align: left; transition: border-color 0.3s, transform 0.3s var(--ease); }
+.listen:hover { border-color: var(--acc, var(--seal)); transform: translateY(-1px); }
+.listen .ring { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--acc, var(--seal)) var(--p, 0%), var(--paper-3) 0); position: relative; flex-shrink: 0; }
+.listen .ring::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: #fff; }
+.listen .glyph { position: relative; width: 0; height: 0; border-left: 12px solid var(--acc, var(--seal)); border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+.listen.playing .glyph { width: 12px; height: 14px; border: 0; margin: 0; background: linear-gradient(to right, var(--acc, var(--seal)) 0 4px, transparent 4px 8px, var(--acc, var(--seal)) 8px); }
+.listen.loading .glyph { animation: pulse 0.8s ease infinite alternate; }
+@keyframes pulse { to { opacity: 0.3; } }
+.listen .txt { display: grid; line-height: 1.2; }
+.listen .txt b { font-family: var(--serif); font-weight: 400; font-size: 17px; letter-spacing: -0.01em; color: var(--ink); }
+.listen .txt small { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-top: 3px; font-variant-numeric: tabular-nums; }
+.product .stage-cap { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+
+/* ───────────────────────────── founder photo ───────────────────────────── */
+.founder .portrait { position: relative; aspect-ratio: 1; width: min(400px, 76vw); border-radius: 50%; overflow: visible; border: 0; margin: clamp(24px, 4vw, 40px) auto 0; }
+.founder .portrait .halo { position: absolute; inset: -22%; width: 144%; height: 144%; pointer-events: none; }
+.founder .portrait picture, .founder .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.founder .portrait img { filter: saturate(0.85) contrast(1.02); box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(243, 239, 230, 0.18); }
+.founder figure { gap: 22px; }
+.founder .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(243, 239, 230, 0.12); border: 1px solid rgba(243, 239, 230, 0.12); border-radius: 16px; overflow: hidden; margin: 32px auto 0; max-width: 420px; }
+.founder .facts > div { background: var(--ink); padding: 16px 18px; display: grid; gap: 4px; }
+.founder .facts dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243, 239, 230, 0.55); }
+.founder .facts dd { margin: 0; font-family: var(--serif); font-size: 34px; line-height: 1; letter-spacing: -0.02em; font-variation-settings: "opsz" 96, "SOFT" 30; }
+.founder .btn.ghost { border-color: rgba(243, 239, 230, 0.25); }
+
+/* ───────────────────────────── newsletter ───────────────────────────── */
+.news { display: grid; gap: 24px; margin-top: 28px; padding: clamp(22px, 4vw, 36px); border: 1px solid var(--line-2); border-radius: 22px; background: rgba(255, 255, 255, 0.4); }
+@media (min-width: 900px) { .news { grid-template-columns: 1.2fr 1fr; align-items: center; } }
+.news-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.news-form input { flex: 1 1 200px; min-height: 48px; padding: 0 18px; border-radius: 100px; border: 1px solid var(--line-2); background: #fff; font: inherit; font-size: 16px; color: var(--ink); }
+.news-form input:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
+.news-form input::placeholder { color: var(--ink-3); }
+
+/* log links */
+.log h3 a { border-bottom: 1px solid var(--line-2); transition: border-color 0.3s; }
+.log h3 a:hover { border-color: var(--seal); }
+.log .sha time { color: var(--ink-2); }

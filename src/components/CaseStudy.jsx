@@ -4,8 +4,8 @@ import { Reveal, Words } from "../lib/Reveal.jsx";
 const LOG = [
   { sha: "phase/01", when: "port", h: "Port UltraStar to iOS", p: "The open-source karaoke engine, rebuilt in Swift with Claude Code. Then rebuilt again, piece by piece, until nothing of the original was left. A virtual Ship of Theseus.", add: "+11,204", del: "−9,870" },
   { sha: "phase/02", when: "format", h: "A song format of our own", p: "Lyrics with the formatting singers actually need, timing that survives a tempo change, and visuals driven by BPM instead of a timeline.", add: "+2,318", del: "−604" },
-  { sha: "phase/03", when: "assess", h: "Vocal assessment, on the phone", p: "Enunciation, pitch accuracy and rhythmic timing, scored by models running locally. No API calls. No latency. No bill.", add: "+4,772", del: "−1,109" },
-  { sha: "phase/04", when: "generate", h: "Describe a song. Sing it.", p: "A generation front end: you describe the track, the AI writes an instrumental, you transpose it into your range and record the vocal. Your song, your lyrics, your voice.", add: "+3,051", del: "−212" },
+  { sha: "phase/03", when: "assess", h: "Vocal assessment, on the phone", p: "Enunciation, pitch accuracy and rhythmic timing, scored by CREPE, HuBERT and Whisper running locally through Core ML. No round trip to a server while you sing. No latency. No bill.", add: "+4,772", del: "−1,109" },
+  { sha: "phase/04", when: "generate", h: "Describe a song. Sing it.", p: "A generation front end: you describe the track, a swappable provider (ElevenLabs or Suno) writes an instrumental, you transpose it into your range and record the vocal. Your song, your lyrics, your voice.", add: "+3,051", del: "−212" },
 ];
 
 export function CaseStudy() {
@@ -33,7 +33,7 @@ export function CaseStudy() {
 
         <Reveal className="stats" delay={0.15} style={{ marginTop: 48 }}>
           <div><span className="v"><em>1</em></span><span className="mono">Engineer</span></div>
-          <div><span className="v">0</span><span className="mono">Servers, API calls</span></div>
+          <div><span className="v">0</span><span className="mono">Cloud calls to score a take</span></div>
           <div><span className="v">&lt;1<span style={{ fontSize: "0.5em" }}> day</span></span><span className="mono">Big-tech salary spent</span></div>
           <div><span className="v">10k<span style={{ fontSize: "0.5em" }}>+</span></span><span className="mono">Singers it's sized for</span></div>
         </Reveal>

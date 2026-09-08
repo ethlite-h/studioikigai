@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — start Vite dev server (add `-- --host` to open it on the LAN for phone testing)
 - `npm run build` — production build to `dist/`
 - `npm run preview` — serve the production build locally
-- `node scripts/make-video.mjs` — regenerate `public/media/*.mp4|jpg` (synthesises a melody in Node, renders it with the `ffmpeg-static` binary; no system ffmpeg needed)
+- `SONG="/path/She Rises!.mp3" node scripts/make-video.mjs` — regenerate `public/media/` (32 s AAC clip, spectrogram + waveform videos, posters) from the real song with the `ffmpeg-static` binary; without `SONG` it synthesises a melody. `CLIP_START` picks the clip offset (default 94 s, the loudest 30 s). The song itself is not in the repo.
 
 No tests, linter, or type-checker are configured.
 
@@ -20,13 +20,16 @@ Single-page React 18 marketing site for Studio Ikigai, built with Vite and deplo
 - `src/styles.css` — the only stylesheet: design tokens (`:root`), typography classes, every section's layout, reveal animations, reduced-motion overrides. Components use these classes plus occasional inline styles for one-offs.
 - `src/lib/scroll.js` — one shared rAF-throttled scroll subscription (`subscribeScroll`), `usePinProgress` (0→1 progress of a pinned section, written to a ref, no re-render), `useInView`, `reducedMotion()`, `isTouch()`.
 - `src/lib/Reveal.jsx` — `<Reveal>` (adds `.is-in` on scroll; CSS animates) and `<Words>` (per-word masked slide-up; pass `mount` for a CSS-keyframe reveal on page load that does not depend on JS timing).
-- `src/three/particles.js` — the Three.js point cloud. Lazily imported by `Thesis.jsx` so Three.js is its own chunk. Three shapes are baked as vertex attributes (mass → scatter → clusters) and mixed in the vertex shader by `uProgress` (0→2). Exposes `setProgress/setPulse/setPointer/start/stop/dispose`.
+- `src/gl/particles.js` — raw WebGL point cloud, no library (~8 KB). Lazily imported by `Thesis.jsx`. Three shapes are baked as vertex attributes (mass → scatter → clusters) and mixed in the vertex shader by `uProgress` (0→2). The pointer repels points (`setPointer`), a tap gathers a temporary vermilion cluster (`tap`). Exposes `setProgress/setPulse/setPointer/clearPointer/tap/start/stop/dispose`.
 - `src/components/Thesis.jsx` — the pinned hero: a 520svh section with a sticky 100svh canvas. Scroll progress drives the particle state and fades four text "steps" in and out by writing styles directly to refs.
 - `src/components/Math.jsx` — the interactive users × price × team calculator.
 - `src/components/Products.jsx` — product data (copy, features, CTAs) and the alternating chapter layout. Phone mockups live in `src/phones/` (Antiviral: DOM + timers; Inner Voice and Sing!: 2D canvas via `useCanvasLoop`, paused when off-screen).
-- `src/components/Founder.jsx` — dark section; toggles `.nav.dark` while it sits under the fixed nav. The "portrait" is a canvas voice print reusing `drawVoicePrint` from the Inner Voice phone.
+- `src/components/Founder.jsx` — dark section; toggles `.nav.dark` while it sits under the fixed nav. Real photo (`public/media/helen.webp|jpg`) with a canvas voice-print halo behind it, bio written from the founder's resume (employers named by her choice), and a facts grid.
+- `src/components/Listen.jsx` — play/pause button for the 32 s clip of "She Rises!" (`public/media/she-rises-clip.m4a`, loaded only on press). Used in the Sing! chapter.
+- `src/components/Log.jsx` — studio log; `ENTRIES` array, newest first. Only add things that actually happened.
+- `src/components/Newsletter.jsx` — email field that hands off to Substack's subscribe page (GET, new tab). No backend, no list of ours.
 - `src/components/Seal.jsx` — the vermilion 生き甲斐 hanko used as the logo.
-- `public/media/` — generated video/poster assets (see script above). Videos are muted, looping, `playsInline`, and only play while in view.
+- `public/media/` — generated assets (see script above) plus the founder photo. Videos are muted, looping, `playsInline`, and only play while in view. `public/og.png` is the share card (1200×630), rendered from a static HTML mock with headless Chrome; `robots.txt` and `sitemap.xml` are static. JSON-LD for the organization, founder and apps lives in `index.html`.
 
 ### Styling conventions
 
@@ -41,4 +44,4 @@ Single-page React 18 marketing site for Studio Ikigai, built with Vite and deplo
 
 ### Content
 
-All copy lives in the components (product data in `Products.jsx`, tenets in `Manifesto.jsx`, steps in `Thesis.jsx`, log in `CaseStudy.jsx`). The diff counts in the case-study log are illustrative texture, not real numbers. Founder is presented as Helen Ma with former employers left unnamed by choice.
+All copy lives in the components (product data in `Products.jsx`, tenets in `Manifesto.jsx`, steps in `Thesis.jsx`, build log in `CaseStudy.jsx`, studio log in `Log.jsx`). The diff counts in the case-study log and the numbers inside the phone mockups are illustrative and labelled "sample data". Product facts (TestFlight status, iOS/macOS, CREPE/HuBERT/Whisper on-device, instrumentals via ElevenLabs/Suno) come from the founder's resume; keep claims consistent with it. Both apps are not yet on the App Store, so there are no store badges.

@@ -19,6 +19,7 @@ export function Footer() {
             <span className="mono">Studio</span>
             <a href="#thesis">Thesis</a>
             <a href="#builder">The builder</a>
+            <a href="#log">Studio log</a>
             <a href="#manifesto">Tenets</a>
             <a href="https://ethlite.substack.com/p/software-engineerings-podcast-moment" target="_blank" rel="noopener noreferrer">Essay ↗</a>
           </div>
@@ -26,6 +27,7 @@ export function Footer() {
             <span className="mono">Contact</span>
             <a href="mailto:info@studioikigai.ai">info@studioikigai.ai</a>
             <a href="https://ethlite.substack.com" target="_blank" rel="noopener noreferrer">Substack ↗</a>
+            <a href="https://linkedin.com/in/ethlite" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           </div>
         </div>
         <div className="bottom">

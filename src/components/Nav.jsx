@@ -7,6 +7,7 @@ const LINKS = [
   ["#math", "The math"],
   ["#products", "Products"],
   ["#builder", "Builder"],
+  ["#log", "Log"],
   ["#essay", "Essay"],
 ];
 

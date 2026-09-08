@@ -1,4 +1,4 @@
-const ITEMS = ["No servers", "No trackers", "No investors", "No dark patterns", "No permission required", "On-device AI", "Made by hand"];
+const ITEMS = ["No accounts", "No trackers", "No investors", "No dark patterns", "No permission required", "On-device AI", "Made by hand"];
 
 export function Ticker() {
   const row = [...ITEMS, ...ITEMS];

@@ -4,7 +4,7 @@ import { useInView } from "../lib/scroll.js";
 
 /* Draws a "Visual Voice Print": a radial figure whose lobes are the harmonics of a voice. */
 export function drawVoicePrint(ctx, w, h, t, { ink = "#1A1714", accent = "#B7572E", paper = "#F3EFE6", scale = 1, rings = 5 } = {}) {
-  ctx.fillStyle = paper; ctx.fillRect(0, 0, w, h);
+  if (paper === "transparent" || paper.startsWith("rgba(0,0,0,0")) ctx.clearRect(0, 0, w, h); else { ctx.fillStyle = paper; ctx.fillRect(0, 0, w, h); }
   const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.36 * scale;
   const N = 220;
   for (let k = rings; k >= 1; k--) {

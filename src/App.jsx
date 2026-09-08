@@ -8,6 +8,7 @@ import { Products } from "./components/Products.jsx";
 import { CaseStudy } from "./components/CaseStudy.jsx";
 import { Founder } from "./components/Founder.jsx";
 import { Manifesto } from "./components/Manifesto.jsx";
+import { Log } from "./components/Log.jsx";
 import { Stack } from "./components/Stack.jsx";
 import { Essay } from "./components/Essay.jsx";
 import { Footer } from "./components/Footer.jsx";
@@ -25,6 +26,7 @@ export default function App() {
         <Products />
         <CaseStudy />
         <Founder />
+        <Log />
         <Manifesto />
         <Stack />
         <Essay />

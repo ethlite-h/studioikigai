@@ -48,7 +48,7 @@ export function MathSection() {
               <div className="row"><span className="mono">Generalists on the team</span><span className="val">{team}</span></div>
               <input type="range" min={1} max={5} step={1} value={team} onChange={(e) => setTeam(+e.target.value)} aria-label="Team size" />
             </label>
-            <p className="thin-note">Assumes a 30% store cut and on-device compute, so infrastructure rounds to nothing. Servers: zero.</p>
+            <p className="thin-note">Assumes a 30% store cut and on-device inference, so infrastructure rounds to nothing.</p>
           </div>
 
           <div className="out">

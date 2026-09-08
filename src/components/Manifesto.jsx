@@ -2,7 +2,7 @@ import { Reveal, Words } from "../lib/Reveal.jsx";
 
 const TENETS = [
   ["The market was never too small.", "It was too small for them. Ten thousand people who care is a business, a community, and a reason to get up. We size products for the people who'll love them, not for a slide."],
-  ["On-device, or it doesn't ship.", "Intelligence runs on your hardware. Your data never leaves your phone. There is no server to breach because there is no server."],
+  ["On-device, or it doesn't ship.", "The models that read your feed or judge your voice run on your hardware. What syncs, syncs through your own iCloud. Nothing about you sits with us."],
   ["Show the model. Hand over the keys.", "Every model we build of you, your interests, your voice, your attention, is visible, editable, exportable and deletable. It's yours."],
   ["Expression over performance.", "We don't optimise for engagement or vocal perfection. We build tools that help you be more yourself, and then get out of the way."],
   ["Customers, not investors.", "No board. No growth targets that never stop. A way to make a living by serving real needs without anyone's permission."],
