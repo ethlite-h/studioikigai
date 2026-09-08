@@ -217,6 +217,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ───────────────────────────── products ───────────────────────────── */
 .product { --acc: var(--seal); padding-block: clamp(72px, 12vw, 160px); position: relative; }
 .product + .product { border-top: 1px solid var(--line); }
+.product .num::before { content: attr(data-n); }
 .product .num { font-family: var(--serif); font-size: clamp(90px, 20vw, 220px); line-height: 0.8; color: var(--acc); opacity: 0.1; position: absolute; right: var(--gutter); top: clamp(8px, 3vw, 60px); pointer-events: none; font-variation-settings: "opsz" 144, "SOFT" 100; letter-spacing: -0.05em; }
 .product .copy { display: grid; gap: 20px; }
 .product .name { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc); }

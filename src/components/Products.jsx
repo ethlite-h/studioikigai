@@ -49,7 +49,7 @@ function Product({ p, i }) {
 
   return (
     <article id={p.id} className="product" style={{ "--acc": p.acc }} ref={ref}>
-      <div className="num" aria-hidden="true">{p.n}</div>
+      <div className="num" data-n={p.n} aria-hidden="true" />
       <div className={`wrap grid-2 ${i % 2 ? "flip" : ""}`}>
         <Reveal className="copy">
           <div className="name"><span>{p.name}</span><span className="badge">{p.badge}</span></div>

@@ -27,7 +27,7 @@ export function Nav() {
     <>
       <header className={`nav ${solid || open ? "solid" : ""} ${open ? "open" : ""}`}>
         <div className="wrap bar">
-          <a className="brand" href="#top" aria-label="Studio Ikigai, back to top" onClick={() => setOpen(false)}>
+          <a className="brand" href="#top" onClick={() => setOpen(false)}>
             <Seal size={30} />
             <span>Studio Ikigai</span>
           </a>
