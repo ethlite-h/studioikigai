@@ -551,3 +551,4 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .research .landing-card .btn { justify-self: stretch; justify-content: center; }
 @media (min-width: 720px) { .research .landing-card .btn { justify-self: start; } }
 .research .landing-notes strong { font-weight: 600; color: var(--ink); }
+.research .landing-belief strong { font-weight: 600; color: var(--ink); }

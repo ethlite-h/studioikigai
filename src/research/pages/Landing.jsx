@@ -14,7 +14,7 @@ export function Landing() {
       </header>
 
       <section className="landing-belief">
-        <p className="body">Here's where I'm starting from, so you know what this isn't. Every tool on offer is a fence: YouTube Kids, Screen Time, blocking. Kids this age still care what their parents think, and that's worth more than any fence. And I'm not trying to get YouTube out of anyone's life. If you've tried the fences and watched them fail, you're exactly who I need to hear from.</p>
+        <p className="body">Here's where I'm starting from, so you know what this isn't. Every tool on offer is a fence: YouTube Kids, Screen Time, blocking. <strong>Kids this age still care what their parents think, and that's worth more than any fence.</strong> And I'm not trying to get YouTube out of anyone's life. If you've tried the fences and watched them fail, you're exactly who I need to hear from.</p>
       </section>
 
       <div className="landing-cards">
