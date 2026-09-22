@@ -15,4 +15,4 @@ export function db() {
 }
 
 export const RESPONSE_COLUMNS =
-  "id, instrument, cohort, family_code, status, created_at, updated_at, completed_at, answers, email, interviewer, child_age, consent";
+  "id, instrument, cohort, family_code, status, created_at, updated_at, completed_at, answers, interviewer, child_age, consent";

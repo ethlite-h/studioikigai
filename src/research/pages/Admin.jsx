@@ -9,13 +9,14 @@ const when = (d) => (d ? new Date(d).toLocaleString([], { dateStyle: "medium", t
 
 export function Admin() {
   const [all, setAll] = useState(null);
+  const [leads, setLeads] = useState([]);
   const [error, setError] = useState("");
   const [tab, setTab] = useState("Parents");
   const [cohort, setCohort] = useState("");
   const [hideSeed, setHideSeed] = useState(true);
 
   useEffect(() => {
-    api.data().then((d) => setAll(d.responses)).catch((e) => {
+    api.data().then((d) => { setAll(d.responses); setLeads(d.leads || []); }).catch((e) => {
       if (e.status === 401) navigate("/research/admin/login", { replace: true });
       else setError(e.message);
     });
@@ -52,7 +53,7 @@ export function Admin() {
       <nav className="tabs" aria-label="Sections">
         {TABS.map((t) => <button key={t} type="button" className={tab === t ? "on" : ""} onClick={() => setTab(t)}>{t}</button>)}
       </nav>
-      {tab === "Parents" && <ParentsTab rows={parents} drafts={drafts.filter((d) => d.instrument === "parents")} />}
+      {tab === "Parents" && <ParentsTab rows={parents} drafts={drafts.filter((d) => d.instrument === "parents")} leads={leads.filter((l) => (!hideSeed || l.cohort !== "seed") && (!cohort || l.cohort === cohort))} />}
       {tab === "Kids" && <KidsTab rows={kids} drafts={drafts.filter((d) => d.instrument === "kids")} />}
       {tab === "Households" && <HouseholdsTab parents={parents} kids={kids} />}
       {tab === "Export" && <ExportTab />}
@@ -143,9 +144,8 @@ function Quotes({ rows, q, meta }) {
   );
 }
 
-function ParentsTab({ rows, drafts }) {
+function ParentsTab({ rows, drafts, leads }) {
   const meta = (r) => [r.cohort, r.family_code && `family: ${r.family_code}`, when(r.completed_at)].filter(Boolean).join(" · ");
-  const leads = rows.filter((r) => r.email);
   return (
     <>
       {drafts.length > 0 && (
@@ -157,12 +157,13 @@ function ParentsTab({ rows, drafts }) {
       <Decisions inst={PARENTS} rows={rows} />
       <section className="leads">
         <h2 className="h4">Pilot leads <span className="mono small">{leads.length}</span></h2>
+        <p className="q-help">Kept in a separate table with no link to any response, so the surveys stay anonymous.</p>
         {leads.length > 0 && (
           <>
-            <button type="button" className="btn ghost" onClick={() => navigator.clipboard.writeText(leads.map((r) => r.email).join(", "))}><span>Copy all emails</span></button>
+            <button type="button" className="btn ghost" onClick={() => navigator.clipboard.writeText(leads.map((l) => l.email).join(", "))}><span>Copy all emails</span></button>
             <table className="leads-table">
-              <thead><tr><th>Email</th><th>Q2 age</th><th>Q37 price</th><th>Q38 interview</th><th>Family</th><th>Cohort</th></tr></thead>
-              <tbody>{leads.map((r) => <tr key={r.id}><td>{r.email}</td><td>{r.answers.p2 ?? ""}</td><td>{r.answers.p37 || ""}</td><td>{r.answers.p38 || ""}</td><td>{r.family_code || ""}</td><td>{r.cohort || ""}</td></tr>)}</tbody>
+              <thead><tr><th>Email</th><th>Cohort</th><th>Day</th></tr></thead>
+              <tbody>{leads.map((l) => <tr key={l.id}><td>{l.email}</td><td>{l.cohort || ""}</td><td>{String(l.created_on).slice(0, 10)}</td></tr>)}</tbody>
             </table>
           </>
         )}

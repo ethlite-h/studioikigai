@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       if (!inst) return send(res, 400, { error: "instrument must be parents or kids" });
       const { rows } = await db().query(`select ${RESPONSE_COLUMNS} from responses where instrument=$1 order by created_at desc`, [instrument]);
       const meta = instrument === "parents"
-        ? ["id", "status", "cohort", "family_code", "created_at", "completed_at", "email"]
+        ? ["id", "status", "cohort", "family_code", "created_at", "completed_at"]
         : ["id", "status", "cohort", "family_code", "created_at", "completed_at", "interviewer", "child_age", "consent"];
       const qids = allQuestions(inst).map((q) => q.id);
       const lines = [[...meta, ...qids].join(",")];
@@ -32,7 +32,8 @@ export default async function handler(req, res) {
       });
     }
     const { rows } = await db().query(`select ${RESPONSE_COLUMNS} from responses order by created_at desc`);
-    return send(res, 200, JSON.stringify({ exported_at: new Date().toISOString(), responses: rows }, null, 2), {
+    const leads = (await db().query("select email, cohort, created_on from pilot_leads order by created_on desc")).rows;
+    return send(res, 200, JSON.stringify({ exported_at: new Date().toISOString(), responses: rows, pilot_leads: leads }, null, 2), {
       "Content-Type": "application/json; charset=utf-8",
       "Content-Disposition": `attachment; filename="lobby-research-${stamp}.json"`,
     });

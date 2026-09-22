@@ -92,11 +92,13 @@ const kids = [
 ];
 
 await client.query("delete from responses where cohort = 'seed'");
+await client.query("delete from pilot_leads where cohort = 'seed'");
 for (const p of parents) {
   await client.query(
-    "insert into responses (instrument, cohort, family_code, status, completed_at, answers, email) values ('parents','seed',$1,'complete',now(),$2,$3)",
-    [p.family_code, JSON.stringify(p.answers), p.email],
+    "insert into responses (instrument, cohort, family_code, status, completed_at, answers) values ('parents','seed',$1,'complete',now(),$2)",
+    [p.family_code, JSON.stringify(p.answers)],
   );
+  if (p.email) await client.query("insert into pilot_leads (email, cohort) values ($1, 'seed')", [p.email]);
 }
 for (const k of kids) {
   await client.query(

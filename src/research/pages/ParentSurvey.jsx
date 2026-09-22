@@ -22,7 +22,7 @@ export function ParentSurvey() {
 
   function saveDraft(extra = {}) {
     if (website || !Object.keys(answers).length) return;
-    api.draft({ id: draftId.current, instrument: "parents", cohort: cohortFromUrl(), family_code: family, email, answers, ...extra })
+    api.draft({ id: draftId.current, instrument: "parents", cohort: cohortFromUrl(), family_code: family, answers, ...extra })
       .then((r) => { if (r.id && !draftId.current) draftId.current = r.id; })
       .catch(() => { /* drafts are best-effort; the final submit is what counts */ });
   }
@@ -53,6 +53,7 @@ export function ParentSurvey() {
         <h2 className="h4">Two optional things, then you're done.</h2>
         <label className="q-sub">If you'd be up for the pilot, leave an email.
           <input type="email" inputMode="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
+          <span className="q-help">Kept in a separate list, apart from your answers. Your survey stays anonymous either way.</span>
         </label>
         <label className="q-sub">Family code
           <input type="text" value={family} onChange={(e) => setFamily(e.target.value)} placeholder="any word your family picks" autoComplete="off" />

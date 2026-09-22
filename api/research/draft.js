@@ -1,9 +1,9 @@
 // POST /api/research/draft — create or update an in-progress response (either instrument).
-// Body: { id (omit to create), instrument, cohort, family_code, answers, email (parents), child_age, interviewer, consent (kids) }
+// Body: { id (omit to create), instrument, cohort, family_code, answers, child_age, interviewer, consent (kids) }
 import { send, readJson, clientIp, method } from "../_lib/http.js";
 import { rateLimit } from "../_lib/ratelimit.js";
 import { db } from "../_lib/db.js";
-import { cleanAnswers, cleanCohort, cleanFamilyCode, cleanEmail, cleanKidMeta } from "../_lib/validate.js";
+import { cleanAnswers, cleanCohort, cleanFamilyCode, cleanKidMeta } from "../_lib/validate.js";
 
 export default async function handler(req, res) {
   if (!method(req, "POST")) return send(res, 405, { error: "POST only" });
@@ -20,18 +20,16 @@ export default async function handler(req, res) {
     const validId = typeof body.id === "string" && /^[0-9a-f-]{36}$/.test(body.id);
 
     if (instrument === "parents") {
-      let email = null;
-      try { email = cleanEmail(body.email); } catch { /* keep saving the draft; submit will report it */ }
       if (validId) {
         const { rows } = await pool.query(
-          "update responses set cohort=$2, family_code=$3, updated_at=now(), answers=$4, email=$5 where id=$1 and instrument='parents' and status='draft' returning id",
-          [body.id, cohort, family_code, JSON.stringify(answers), email],
+          "update responses set cohort=$2, family_code=$3, updated_at=now(), answers=$4 where id=$1 and instrument='parents' and status='draft' returning id",
+          [body.id, cohort, family_code, JSON.stringify(answers)],
         );
         if (rows[0]) return send(res, 200, { ok: true, id: rows[0].id });
       }
       const { rows } = await pool.query(
-        "insert into responses (instrument, cohort, family_code, status, answers, email) values ('parents',$1,$2,'draft',$3,$4) returning id",
-        [cohort, family_code, JSON.stringify(answers), email],
+        "insert into responses (instrument, cohort, family_code, status, answers) values ('parents',$1,$2,'draft',$3) returning id",
+        [cohort, family_code, JSON.stringify(answers)],
       );
       return send(res, 200, { ok: true, id: rows[0].id });
     }
