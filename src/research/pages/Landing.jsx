@@ -37,7 +37,7 @@ export function Landing() {
         <ul className="body">
           <li>A pilot with a few families, later this year. If you leave an email at the end of the survey, you'll be asked first.</li>
           <li>I'll write up what I learn and send it to everyone who took part, whether or not a product comes of it.</li>
-          <li>Your answers are anonymous and go to one private database that only I can read. No analytics, no tracking, no third-party scripts on these pages. If you leave an email for the pilot, it's kept in a separate list that isn't tied to your answers.</li>
+          <li>Your answers are anonymous and go to one private database that only I can read. No analytics, no tracking, no third-party scripts on these pages. <strong>If you leave an email for the pilot, it's kept in a separate list that isn't tied to your answers.</strong></li>
           <li>If your kid does the conversation too, both forms ask for a family code. Make up any word and use it on both, so I can read your answers together.</li>
           <li>Questions? <a href="mailto:info@studioikigai.ai">info@studioikigai.ai</a></li>
         </ul>
