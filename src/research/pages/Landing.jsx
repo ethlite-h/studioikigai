@@ -21,7 +21,7 @@ export function Landing() {
         <a className="landing-card" href={`/research/parents${q}`}>
           <p className="mono small">Do this first · for you · about 10 minutes</p>
           <h2 className="h4">The parent survey</h2>
-          <p className="body">Thirty-nine questions on your phone: what they watch, what you wish you knew, and honest reactions to five ideas. No email needed. Leave anything blank.</p>
+          <p className="body">A 10 minute survey on: what they watch, what you wish you knew, and honest reactions to five ideas. No email needed. Leave anything blank.</p>
           <span className="btn solid"><span>Start the survey</span><span className="arr">→</span></span>
         </a>
         <a className="landing-card" href={`/research/kids${q}`}>
