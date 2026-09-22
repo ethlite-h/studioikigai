@@ -4,7 +4,7 @@ export const answered = (rows, id) => rows.filter((r) => {
   const v = r.answers?.[id];
   if (v == null || v === "") return false;
   if (Array.isArray(v)) return v.some((x) => x !== "" && x != null);
-  if (typeof v === "object") return v.rating != null || v.choice || Object.values(v).some((x) => typeof x === "string" && x.trim());
+  if (typeof v === "object") return v.rating != null || v.choice || Object.values(v).some((x) => (typeof x === "string" && x.trim()) || (x && typeof x === "object" && Object.values(x).some((y) => typeof y === "string" && y.trim())));
   return true;
 });
 
@@ -128,7 +128,7 @@ export function show(q, v) {
     case "kids-roster": return v.length ? v.map((a) => `age ${a}`).join(", ") : "";
     case "short": return Array.isArray(v) ? v.filter(Boolean).join(", ") : v;
     case "gbd": return [GBD.find((g) => g.id === v.choice)?.label, v.said, v.then && `Then: ${v.then}`].filter(Boolean).join(" — ");
-    case "names": return Object.entries(v).map(([n, r]) => `${n}: ${r.reaction || ""}${r.face ? ` (${r.face})` : ""}`).join("  ·  ");
+    case "names": return [...q.names.map((n) => `${n}: ${v[n]?.reaction || ""}${v[n]?.face ? ` (${v[n].face})` : ""}`), v.suggestion && `Their name: ${v.suggestion}`].filter(Boolean).join("  ·  ");
     default: return String(v);
   }
 }

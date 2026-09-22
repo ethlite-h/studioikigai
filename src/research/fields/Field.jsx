@@ -175,6 +175,11 @@ function Gbd({ q, value = {}, onChange, id }) {
 function Names({ q, value = {}, onChange }) {
   return (
     <div className="q-names">
+      {q.suggest && (
+        <label className="q-sub q-suggest">{q.suggest}
+          <input type="text" value={value.suggestion || ""} onChange={(e) => onChange({ ...value, suggestion: e.target.value })} placeholder="their idea, in their words" />
+        </label>
+      )}
       {q.names.map((n) => (
         <div key={n} className="name-card">
           <p className="h4">{n}</p>

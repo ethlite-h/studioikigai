@@ -552,3 +552,4 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 720px) { .research .landing-card .btn { justify-self: start; } }
 .research .landing-notes strong { font-weight: 600; color: var(--ink); }
 .research .landing-belief strong { font-weight: 600; color: var(--ink); }
+.research .q-names .q-suggest { grid-column: 1 / -1; }

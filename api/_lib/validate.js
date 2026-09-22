@@ -57,8 +57,11 @@ function cleanOne(q, v) {
       return (Array.isArray(v) ? v : []).map(Number).filter((n) => Number.isFinite(n) && n >= 0 && n <= 20).slice(0, 8);
     case "gbd":
       return { choice: GBD.some((g) => g.id === v?.choice) ? v.choice : "", said: str(v?.said), then: q.then ? str(v?.then) : "" };
-    case "names":
-      return Object.fromEntries(q.names.map((n) => [n, { reaction: str(v?.[n]?.reaction, 1000), face: str(v?.[n]?.face, 500) }]));
+    case "names": {
+      const out = Object.fromEntries(q.names.map((n) => [n, { reaction: str(v?.[n]?.reaction, 1000), face: str(v?.[n]?.face, 500) }]));
+      if (q.suggest) out.suggestion = str(v?.suggestion, 300);
+      return out;
+    }
     default:
       throw err(`Unknown question type ${q.type}`);
   }
