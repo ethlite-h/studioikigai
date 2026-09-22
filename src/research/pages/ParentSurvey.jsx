@@ -39,7 +39,7 @@ export function ParentSurvey() {
     setBusy(true); setError("");
     try {
       await api.submit({ id: draftId.current, instrument: "parents", cohort: cohortFromUrl(), family_code: family, email, answers, website });
-      navigate("/research/thanks");
+      navigate(`/research/thanks${cohortFromUrl() ? `?c=${cohortFromUrl()}` : ""}`, { state: { from: "parents" } });
     } catch (err) {
       setError(err.message);
       setBusy(false);

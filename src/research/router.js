@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 // Five routes; a History-API switch is enough.
 const listeners = new Set();
-export function navigate(path, { replace = false } = {}) {
-  window.history[replace ? "replaceState" : "pushState"](null, "", path);
+export function navigate(path, { replace = false, state = null } = {}) {
+  window.history[replace ? "replaceState" : "pushState"](state, "", path);
   listeners.forEach((l) => l(window.location.pathname));
   window.scrollTo(0, 0);
 }

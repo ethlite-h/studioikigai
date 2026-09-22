@@ -54,7 +54,7 @@ export function KidInterview() {
     try {
       await api.submit({ instrument: "kids", id: draftId, cohort: cohortFromUrl(), family_code: meta.family_code, answers, child_age: Number(meta.child_age), interviewer: meta.interviewer, consent: meta.consent, website });
       dirty.current = false;
-      navigate("/research/thanks");
+      navigate(`/research/thanks${cohortFromUrl() ? `?c=${cohortFromUrl()}` : ""}`, { state: { from: "kids" } });
     } catch (err) {
       setError(err.message);
       setBusy(false);
