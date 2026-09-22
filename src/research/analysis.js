@@ -128,7 +128,6 @@ export function show(q, v) {
     case "kids-roster": return v.length ? v.map((a) => `age ${a}`).join(", ") : "";
     case "short": return Array.isArray(v) ? v.filter(Boolean).join(", ") : v;
     case "gbd": return [GBD.find((g) => g.id === v.choice)?.label, v.said, v.then && `Then: ${v.then}`].filter(Boolean).join(" — ");
-    case "names": return [...q.names.map((n) => `${n}: ${v[n]?.reaction || ""}${v[n]?.face ? ` (${v[n].face})` : ""}`), v.suggestion && `Their name: ${v.suggestion}`].filter(Boolean).join("  ·  ");
     default: return String(v);
   }
 }

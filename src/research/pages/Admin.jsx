@@ -217,30 +217,6 @@ function KidsTab({ rows, drafts }) {
                 </div>
               )}
               {q.type === "gbd" && <Quotes rows={rows.filter((r) => r.answers[q.id]?.said || r.answers[q.id]?.then)} q={q} meta={meta} />}
-              {q.type === "names" && q.suggest && (
-                <div className="band">
-                  <p className="mono small">{q.suggest}</p>
-                  <ul className="quotes">
-                    {[...rows].sort((a, b) => a.child_age - b.child_age).filter((r) => r.answers.k19?.suggestion?.trim()).map((r) => (
-                      <li key={r.id}><span className="quote-text">{r.answers.k19.suggestion}</span><span className="mono small">{meta(r)}</span></li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {q.type === "names" && (
-                <div className="band-grid">
-                  {q.names.map((n) => (
-                    <div key={n} className="band">
-                      <p className="h4">{n}</p>
-                      <ul className="quotes">
-                        {[...rows].sort((a, b) => a.child_age - b.child_age).filter((r) => r.answers.k19?.[n]?.reaction || r.answers.k19?.[n]?.face).map((r) => (
-                          <li key={r.id}><span className="quote-text">{r.answers.k19[n].reaction}{r.answers.k19[n].face && <em> · face: {r.answers.k19[n].face}</em>}</span><span className="mono small">{meta(r)}</span></li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )}
               {q.type === "long" && <Quotes rows={[...rows].sort((a, b) => a.child_age - b.child_age)} q={q} meta={meta} />}
             </article>
           ))}

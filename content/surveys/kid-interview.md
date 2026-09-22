@@ -41,7 +41,7 @@ This is a conversation, not a form. A 7-year-old can't fill in a survey and a 10
 16. "You could put a video in your mom's YouTube, and it would say it's from you." good · bad · don't care. *(This is the presence test flipped. If it lands, the two-way window is real.)*
 17. "You and your dad could both mark a video as one to watch together tonight." good · bad · don't care.
 18. "A grown-up could tap a video and it turns into a question they ask you at dinner, instead of blocking it." good · bad · don't care. Then: "Would you rather they blocked it or asked about it?"
-19. Name test. "If this app was called \_\_\_, and your friend saw it on your iPad, what would they say?" Try Lobby, then Co-op. Write the exact reaction, including the face.
+19. What would you call this app?
 20. Last one: "If you could change one thing about YouTube, what would it be?"
 
 ## What each question tests

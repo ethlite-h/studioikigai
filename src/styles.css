@@ -461,8 +461,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .research .link-btn:hover { color: var(--seal); border-color: var(--seal); }
 .research .q-sub { display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); }
 .research .q-sub + .q-sub, .research .gbd-row + .q-sub { margin-top: 12px; }
-.research .q-names { display: grid; gap: 14px; }
-.research .name-card { padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, 0.4); display: grid; gap: 10px; }
 .research .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .research .form-error { color: var(--seal-2); font-size: 15px; }
 .research .form-nav { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 36px; }
@@ -483,7 +481,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 720px) {
   .research .kid-meta { grid-template-columns: auto auto 1fr; align-items: start; }
   .research .kid-meta .consent { grid-column: 1 / -1; }
-  .research .q-names { grid-template-columns: 1fr 1fr; }
 }
 
 /* dashboard */
@@ -552,4 +549,3 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 720px) { .research .landing-card .btn { justify-self: start; } }
 .research .landing-notes strong { font-weight: 600; color: var(--ink); }
 .research .landing-belief strong { font-weight: 600; color: var(--ink); }
-.research .q-names .q-suggest { grid-column: 1 / -1; }

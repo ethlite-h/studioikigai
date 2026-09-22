@@ -33,7 +33,6 @@ function Input({ q, value, onChange, id, kid }) {
     case "number": return <input type="number" inputMode="numeric" aria-label={q.prompt} min={q.min} max={q.max} className="q-num" value={value ?? ""} onChange={(e) => onChange(e.target.value === "" ? "" : Number(e.target.value))} />;
     case "kids-roster": return <Roster value={value} onChange={onChange} />;
     case "gbd": return <Gbd q={q} value={value} onChange={onChange} id={id} />;
-    case "names": return <Names q={q} value={value} onChange={onChange} />;
     default: return null;
   }
 }
@@ -168,29 +167,6 @@ function Gbd({ q, value = {}, onChange, id }) {
           <textarea rows={2} value={value.then || ""} onChange={(e) => onChange({ ...value, then: e.target.value })} />
         </label>
       )}
-    </div>
-  );
-}
-
-function Names({ q, value = {}, onChange }) {
-  return (
-    <div className="q-names">
-      {q.suggest && (
-        <label className="q-sub q-suggest">{q.suggest}
-          <input type="text" value={value.suggestion || ""} onChange={(e) => onChange({ ...value, suggestion: e.target.value })} placeholder="their idea, in their words" />
-        </label>
-      )}
-      {q.names.map((n) => (
-        <div key={n} className="name-card">
-          <p className="h4">{n}</p>
-          <label className="q-sub">Reaction, in their words
-            <textarea rows={2} value={value[n]?.reaction || ""} onChange={(e) => onChange({ ...value, [n]: { ...value[n], reaction: e.target.value } })} />
-          </label>
-          <label className="q-sub">The face
-            <input type="text" value={value[n]?.face || ""} onChange={(e) => onChange({ ...value, [n]: { ...value[n], face: e.target.value } })} />
-          </label>
-        </div>
-      ))}
     </div>
   );
 }

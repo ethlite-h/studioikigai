@@ -14,7 +14,6 @@
 //   number        integer                             answer: number
 //   kids-roster   repeatable age fields               answer: number[] (one age per kid)
 //   gbd           good / bad / don't care             answer: { choice: 'good'|'bad'|'dontcare'|'', said: string, then: string }
-//   names         name test                           answer: { [name]: { reaction: string, face: string }, suggestion: string }  (when `suggest` is set)
 // `other: true` on an option adds a free-text field; the answer is then "Other: <text>".
 
 const GBD_OPTIONS = [
@@ -199,7 +198,7 @@ export const KIDS = {
         { id: "k16", n: 16, type: "gbd", prompt: "\"You could put a video in your mom's YouTube, and it would say it's from you.\"", help: "(This is the presence test flipped. If it lands, the two-way window is real.)" },
         { id: "k17", n: 17, type: "gbd", prompt: "\"You and your dad could both mark a video as one to watch together tonight.\"" },
         { id: "k18", n: 18, type: "gbd", prompt: "\"A grown-up could tap a video and it turns into a question they ask you at dinner, instead of blocking it.\"", then: "\"Would you rather they blocked it or asked about it?\"" },
-        { id: "k19", n: 19, type: "names", prompt: "Name test. \"If this app was called ___, and your friend saw it on your iPad, what would they say?\"", help: "Try Lobby, then Co-op. Write the exact reaction, including the face.", names: ["Lobby", "Co-op"], suggest: "What would you call it?" },
+        { id: "k19", n: 19, type: "long", prompt: "What would you call this app?" },
         { id: "k20", n: 20, type: "long", prompt: "Last one: \"If you could change one thing about YouTube, what would it be?\"" },
       ],
     },
