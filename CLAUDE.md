@@ -46,3 +46,13 @@ Single-page React 18 marketing site for Studio Ikigai, built with Vite and deplo
 ### Content
 
 All copy lives in the components (product data in `Products.jsx`, tenets in `Manifesto.jsx`, steps in `Thesis.jsx`, build log in `CaseStudy.jsx`, studio log in `Log.jsx`). The diff counts in the case-study log and the numbers inside the phone mockups are illustrative and labelled "sample data". Product facts (TestFlight status, iOS/macOS, CREPE/HuBERT/Whisper on-device, instrumentals via ElevenLabs/Suno) come from the founder's resume; keep claims consistent with it. Both apps are not yet on the App Store, so there are no store badges.
+
+## Research (`/research/*`)
+
+Two discovery instruments for the "Lobby" parent app plus a private dashboard. Source of truth for the questions is `content/surveys/parent-survey.md` and `content/surveys/kid-interview.md`; `src/research/questions.js` transcribes them as data (prompts, notes, options, answer types, the "What each question tests" tables). Forms, validation and dashboard all render from that file.
+
+- `research.html` is a second Vite entry: no Google Fonts, no analytics, no JSON-LD. `vercel.json` rewrites `/research` and `/research/*` to it; in dev the plugin in `vite.config.js` does the same and runs the `api/` functions in-process, so `npm run dev` is enough.
+- Routes: `/research` (landing, links to both instruments and passes `?c=` through), `/research/parents`, `/research/kids`, `/research/thanks` (public, optional `?c=<cohort>`), `/research/admin`, `/research/admin/login`. Routing is the small History-API switch in `src/research/router.js`.
+- `api/research/submit.js`, `api/research/draft.js` (kid interview autosave), `api/research/admin/{login,data,export}.js`. Shared code in `api/_lib/` (HMAC session cookie, constant-time password check, in-memory salted-IP rate limiter, answer validation). Admin functions return 401 without the session.
+- Postgres via Neon (Vercel marketplace). One table, `responses`; migration in `db/migrations/`, `npm run research:migrate`, `npm run research:seed` (cohort `seed`). Local dev uses Homebrew Postgres, see `.env.example`.
+- Never store IPs, user agents or child names. Age only for kids. Env: `DATABASE_URL`, `RESEARCH_ADMIN_PASSWORD`, `RESEARCH_SESSION_SECRET`.

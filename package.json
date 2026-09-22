@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "research:migrate": "node scripts/research-migrate.mjs",
+    "research:seed": "node scripts/research-seed.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
+    "pg": "^8.23.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
