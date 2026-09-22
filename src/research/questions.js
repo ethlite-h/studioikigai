@@ -197,7 +197,7 @@ export const KIDS = {
         { id: "k15", n: 15, type: "gbd", prompt: "\"Your mom could see the channels you watch, but only once a week, and never what you're watching right now.\"", then: "\"Would once a week feel different from right now?\"" },
         { id: "k16", n: 16, type: "gbd", prompt: "\"You could put a video in your mom's YouTube, and it would say it's from you.\"", help: "(This is the presence test flipped. If it lands, the two-way window is real.)" },
         { id: "k17", n: 17, type: "gbd", prompt: "\"You and your dad could both mark a video as one to watch together tonight.\"" },
-        { id: "k18", n: 18, type: "gbd", prompt: "\"A grown-up could tap a video and it turns into a question they ask you at dinner, instead of blocking it.\"", then: "\"Would you rather they blocked it or asked about it?\"" },
+        { id: "k18", n: 18, type: "gbd", prompt: "\"A grown-up could tap a video and ask you about it instead of blocking it.\"", then: "\"Would you rather they blocked it or asked about it?\"" },
         { id: "k19", n: 19, type: "long", prompt: "What would you call this app?" },
         { id: "k20", n: 20, type: "long", prompt: "Last one: \"If you could change one thing about YouTube, what would it be?\"" },
       ],
@@ -213,7 +213,6 @@ export const KIDS = {
     { questions: ["k10", "k11", "k15"], decision: "Creators-only and weekly delay as the privacy line", threshold: "\"I'd stop watching some\" on channels means even the creator view is too much for that age; \"weird\" on videos and \"fine\" on channels confirms the line" },
     { questions: ["k14"], decision: "Attribution", threshold: "\"Bad\" when the note is removed confirms the disclosure rule; \"don't care\" either way means attribution is for the parent, not the kid" },
     { questions: ["k18"], decision: "Ask-about-this vs blocking", threshold: "Kids who prefer the block are telling you the conversation costs them more than the loss" },
-    { questions: ["k19"], decision: "Name", threshold: "The face is the answer" },
   ],
   footnote: "Run it with at least four kids at each end of the range. A 7-year-old's answers and a 10-year-old's won't agree, and the features that survive both are the ones to build first.",
 };

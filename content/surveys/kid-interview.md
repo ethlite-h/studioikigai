@@ -40,7 +40,7 @@ This is a conversation, not a form. A 7-year-old can't fill in a survey and a 10
 15. "Your mom could see the channels you watch, but only once a week, and never what you're watching right now." good · bad · don't care. Then: "Would once a week feel different from right now?"
 16. "You could put a video in your mom's YouTube, and it would say it's from you." good · bad · don't care. *(This is the presence test flipped. If it lands, the two-way window is real.)*
 17. "You and your dad could both mark a video as one to watch together tonight." good · bad · don't care.
-18. "A grown-up could tap a video and it turns into a question they ask you at dinner, instead of blocking it." good · bad · don't care. Then: "Would you rather they blocked it or asked about it?"
+18. "A grown-up could tap a video and ask you about it instead of blocking it." good · bad · don't care. Then: "Would you rather they blocked it or asked about it?"
 19. What would you call this app?
 20. Last one: "If you could change one thing about YouTube, what would it be?"
 
@@ -57,6 +57,5 @@ This is a conversation, not a form. A 7-year-old can't fill in a survey and a 10
 | 10–11, 15 | Creators-only and weekly delay as the privacy line | "I'd stop watching some" on channels means even the creator view is too much for that age; "weird" on videos and "fine" on channels confirms the line |
 | 14 | Attribution | "Bad" when the note is removed confirms the disclosure rule; "don't care" either way means attribution is for the parent, not the kid |
 | 18 | Ask-about-this vs blocking | Kids who prefer the block are telling you the conversation costs them more than the loss |
-| 19 | Name | The face is the answer |
 
 Run it with at least four kids at each end of the range. A 7-year-old's answers and a 10-year-old's won't agree, and the features that survive both are the ones to build first.
