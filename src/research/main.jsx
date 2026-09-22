@@ -27,7 +27,7 @@ function NotFound() {
 }
 
 const TITLES = {
-  "/research": "YouTube talks to your kid every day. Let's be part of the conversation.",
+  "/research": "YouTube talks to our kid every day. Let's be part of the conversation.",
   "/research/parents": "The parent survey — Studio Ikigai",
   "/research/kids": "A conversation with your kid — Studio Ikigai",
   "/research/thanks": "Thank you — Studio Ikigai",

@@ -9,7 +9,7 @@ export function Landing() {
     <div className="wrap research-page landing">
       <header className="landing-head">
         <p className="mono kicker">From one parent to another</p>
-        <h1 className="h2 display">YouTube talks to your kid every day. <em>Let's be part of the conversation.</em></h1>
+        <h1 className="h2 display">YouTube talks to our kid every day. <em>Let's be part of the conversation.</em></h1>
         <p className="lede">Hi! I'm Helen. I have three kids, 7 to 10, and every day people I've never met get to shape what they find funny, cool, and true. That concerns me the same way it probably concerns you. Before I build anything, I want to know whether other parents want what I want.</p>
       </header>
 
